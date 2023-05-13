@@ -7,7 +7,6 @@ defineProps({
     image: String,
     slug: String
 })
-
 </script>
 
 <template>

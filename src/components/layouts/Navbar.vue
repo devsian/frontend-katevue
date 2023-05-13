@@ -1,6 +1,4 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-
 // Commponent
 import Logo from './Logo.vue';
 import NavigationLinks from './NavigationLinks.vue';
