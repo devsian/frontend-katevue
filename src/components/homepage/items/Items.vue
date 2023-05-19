@@ -8,7 +8,6 @@ const items = ref([
     {id: 2, title:'Online Doctor Consultation', slug: 'User Interface', image:'items-2.jpg'},
     {id: 3, title:'Banking Crypto', slug: 'User Interface', image:'items-3.jpg'},
 ])
-
 </script>
 
 <template>
@@ -18,6 +17,7 @@ const items = ref([
 
             <ItemsCardVue
                 v-for="item in items"
+                :id="item.id"
                 :key="item.id"
                 :title="item.title"
                 :slug="item.slug"
