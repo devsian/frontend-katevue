@@ -15,8 +15,8 @@ const categories = ref([])
 async function getCategoriesData() {
     try {
         const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/categories?show_product=1')
-        console.log(response.data)
         categories.value = response.data.data.data
+        // console.log(response.data)
     } catch (error) {
         console.log(error)
     }
@@ -35,11 +35,12 @@ onMounted(() => {
         </h2>
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
             <CategoriesCard
-                 v-for="category in categories"
+                 v-for="(category, index) in categories"
                  :key="category.id"
                  :title="category.name"
                  :count="category.products.length"
                  :image="category.thumbnails"
+                 :class="{'hidden':index >= 4}"
              />
         </div>
     </div>

@@ -1,13 +1,31 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import ItemsCardVue from './ItemsCard.vue'
 
-// ref = data in options
-const items = ref([
-    {id: 1, title:'Mobile UI Kit', slug: 'User Interface', image:'items-1.jpg'},
-    {id: 2, title:'Online Doctor Consultation', slug: 'User Interface', image:'items-2.jpg'},
-    {id: 3, title:'Banking Crypto', slug: 'User Interface', image:'items-3.jpg'},
-])
+// const items = ref([
+//     {id: 1, title:'Mobile UI Kit', slug: 'User Interface', image:'items-1.jpg'},
+//     {id: 2, title:'Online Doctor Consultation', slug: 'User Interface', image:'items-2.jpg'},
+//     {id: 3, title:'Banking Crypto', slug: 'User Interface', image:'items-3.jpg'},
+// ])
+
+const items = ref([])
+
+async function getItemsData() {
+    try {
+        const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/products')
+        console.log(response.data)
+        items.value = response.data.data.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+onMounted(() => {
+    getItemsData();
+})
+
+
 </script>
 
 <template>
@@ -19,9 +37,9 @@ const items = ref([
                 v-for="item in items"
                 :id="item.id"
                 :key="item.id"
-                :title="item.title"
-                :slug="item.slug"
-                :image="item.image"
+                :title="item.name"
+                :slug="item.subtitle"
+                :image="item.thumbnails"
             />
 
         </div>
