@@ -1,9 +1,8 @@
 <script setup>
-// Tidak digunakan diganti yang ada pada folder categories
-
 import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import axios from 'axios'
-import ItemsCard from './ItemsCard.vue'
+import ItemsCard from '../homepage/items/ItemsCard.vue'
 
 // const items = ref([
 //     {id: 1, title:'Mobile UI Kit', slug: 'User Interface', image:'items-1.jpg'},
@@ -12,12 +11,14 @@ import ItemsCard from './ItemsCard.vue'
 // ])
 
 const items = ref([])
+const category = ref({});
+const route = useRoute()
 
 async function getItemsData() {
     try {
-        const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/products')
-        console.log(response.data)
-        items.value = response.data.data.data
+        const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/categories?id=' + route.params.id + '&show_product=1')
+        items.value = response.data.data.products
+        category.value = response.data.data
     } catch (error) {
         console.log(error)
     }
@@ -32,7 +33,7 @@ onMounted(() => {
 
 <template>
     <div class="container px-4 mx-auto my-16 md:px-12">
-        <h2 class="mb-4 text-xl font-medium md:mb-0 md:text-lg text-black">New Items</h2>
+        <h2 class="mb-4 text-xl font-medium md:mb-0 md:text-lg text-black">{{ category.name }}</h2>
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
 
             <ItemsCard

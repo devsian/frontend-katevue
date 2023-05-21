@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios';
-import CategoriesCard from '../categories/CategoriesCard.vue';
+import CategoriesCard from '../homepage/categories/CategoriesCard.vue';
 
 // const categories = ref([
 //     { id: 1, title: 'Mobile UI Kit', count: '123', image: 'categories-1.jpg' },
@@ -14,7 +14,7 @@ const categories = ref([])
 
 async function getCategoriesData() {
     try {
-        const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/categories?show_product=1&limit=4')
+        const response = await axios.get('http://zullkit-backend.buildwithangga.id/api/categories?show_product=1')
         categories.value = response.data.data.data
         // console.log(response.data)
     } catch (error) {
@@ -31,7 +31,7 @@ onMounted(() => {
 <template>
     <div class="container px-4 mx-auto my-16 md:px-12">
         <h2 class="mb-4 text-xl font-medium md:mb-0 md:text-lg text-black" id="categories">
-            Top Categories
+            All Categories
         </h2>
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
             <!-- <CategoriesCard
