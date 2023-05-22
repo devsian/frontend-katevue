@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, useRoute } from "vue-router";
-import { ref, onMounted, computed} from "vue";
+import { ref, onMounted, computed } from "vue";
 import Gallery from "../components/detail/Gallery.vue";
 import axios from "axios";
 
@@ -19,8 +19,13 @@ async function getProduct() {
   }
 }
 
+
+// pengecekan untuk memastikan item.value.features tidak undefined sebelum menggunakan metode split().
 const features = computed(() => {
-  return item.value.features.split(",");
+  if (item.value && item.value.features) {
+    return item.value.features.split(",");
+  }
+  return [];
 });
 
 onMounted(() => {
@@ -40,6 +45,7 @@ onMounted(() => {
           <p class="text-gray-500">{{ item.subtitle }}</p>
 
           <Gallery 
+            v-if="item"
             :defaultImage="item.thumbnails" 
             :galleries="item.galleries" 
           />

@@ -26,11 +26,7 @@ function changeImage(image) {
           class="overflow-hidden cursor-pointer rounded-2xl"
           :class="{ 'ring-2 ring-indigo-500': thumbnail == gallery.url }"
         >
-          <img
-            :src="gallery.url"
-            class="w-full"
-            alt=""
-          />
+          <img :src="gallery.url" class="w-full" alt="" />
         </div>
       </template>
     </div>

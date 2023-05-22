@@ -121,7 +121,11 @@ import { RouterLink } from 'vue-router'
                             </div>
                         </div>
                     </div>
-                    <FeatureList />
+                    <div class="w-full p-5 mx-auto mb-10 md:max-w-7xl">
+                        <div class="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 md:mx-0">
+                            <FeatureList />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

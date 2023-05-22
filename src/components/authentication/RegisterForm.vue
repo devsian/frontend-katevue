@@ -1,12 +1,33 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import axios from "axios";
 
 const form = ref({
-  name: '',
-  email: '',
-  password: ''
+  name: "",
+  email: "",
+  password: "",
+  title: "UX Designer",
 });
+
+async function register() {
+  try {
+    const response = await axios.post(
+      "http://zullkit-backend.buildwithangga.id/api/register",
+      {
+        name: form.value.name,
+        email: form.value.email,
+        password: form.value.password,
+        title: form.value.title,
+      }
+    );
+    // menyimpan data login token pada localStorage
+    localStorage.setItem("access_token", response.data.data.access_token);
+    localStorage.setItem("token_type", response.data.data.token_type);
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <template>
@@ -14,6 +35,7 @@ const form = ref({
     <div class="mb-4">
       <label class="block mb-1" for="name">Name</label>
       <input
+        @keyup.enter="register"
         v-model="form.name"
         placeholder="Type your full name"
         id="name"
@@ -25,6 +47,7 @@ const form = ref({
     <div class="mb-4">
       <label class="block mb-1" for="email">Email Address</label>
       <input
+        @keyup.enter="register"
         v-model="form.email"
         placeholder="Type your email"
         id="email"
@@ -36,6 +59,7 @@ const form = ref({
     <div class="mb-4">
       <label class="block mb-1" for="password">Password</label>
       <input
+        @keyup.enter="register"
         v-model="form.password"
         placeholder="Type your password"
         id="password"
@@ -46,6 +70,7 @@ const form = ref({
     </div>
     <div class="mt-6">
       <button
+        @click="register"
         type="button"
         class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-lg md:px-10 hover:shadow"
       >
@@ -61,5 +86,3 @@ const form = ref({
     </div>
   </form>
 </template>
-
-<style scoped></style>
