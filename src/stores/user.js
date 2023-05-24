@@ -27,7 +27,7 @@ export const useUserStore = defineStore({
         async fetchUser() {
             try {
                 // 10. Melakukan permintaan GET menggunakan axios
-                const { data } = await axios.get('http://zullkit-backend.buildwithangga.id/api/user', {
+                const { data } = await axios.get('https://zullkit-backend.buildwithangga.id/api/user', {
                     // 11. Mengatur header Auth dengan token yang ada di local storage
                     headers: {
                         Authorization: localStorage.getItem('token_type') + ' ' + localStorage.getItem('access_token')

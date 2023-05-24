@@ -18,7 +18,7 @@ const form = ref({
 async function register() {
   try {
     const response = await axios.post(
-      "http://zullkit-backend.buildwithangga.id/api/register",
+      "https://zullkit-backend.buildwithangga.id/api/register",
       {
         name: form.value.name,
         email: form.value.email,
